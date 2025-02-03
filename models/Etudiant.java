@@ -36,4 +36,14 @@ public class Etudiant extends Personne {
     public Map<String,Double> getNote() { return note; }
     // Setter pour la note
     public void setNote(Map<String,Double> note) { this.note = note; }
+
+    //Getter pour le nom
+    public String getNom() { return nom; }
+    //setter pour le nom
+    public void setNom(String nom) { this.nom = nom; }
+
+    //Getter pour l'age
+    public int getAge() { return age; }
+    //setter pour l'age
+    public void setAge(int age) { this.age = age; }
 }

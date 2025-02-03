@@ -14,4 +14,7 @@ public class Classe {
         this.professeurs = professeurs;
         this.etudiants = etudiants;
     }
+
+    public String getNiveau() { return niveau; }
+    public void setNiveau(String niveau) { this.niveau = niveau; }
 }
