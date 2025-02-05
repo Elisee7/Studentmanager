@@ -9,7 +9,7 @@ public class Etudiant extends Personne {
     //private Map<String,Double> note = new HashMap<String,Double>(); // Note de l'étudiant
     private ArrayList<Map<String,Double>> note = new ArrayList<Map<String,Double>>();
     // Constructeur pour initialiser les attributs de l'étudiant
-    public Etudiant(String nom, int age, Classe classe) {
+    public Etudiant(String nom, int age) {
         super(nom, age); // Appel du constructeur de la classe parente Personne
     }
 

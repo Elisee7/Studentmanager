@@ -1,12 +1,13 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.HashMap;
 
 public class Administrateur extends Personne {
     private ArrayList<Classe> listeClasses = new ArrayList<>();
+
     public Administrateur(String nom, int age, ArrayList<Classe> listeClasses) {
         super(nom, age);
         this.listeClasses = listeClasses;
@@ -68,14 +69,7 @@ public class Administrateur extends Personne {
     public void creeEtudiant(Classe classe, Scanner scan) {
         String nom = getNomPersonne(scan);
         int age = getAgePersonne(scan);
-        //double moyenne = scan.nextDouble();
-        //Map<String,Double> note = new HashMap<String,Double>();
-        //Note de l'étudiant
-        //String module = scan.nextLine();
-        //double noteModule = scan.nextDouble();
-        //note.put(module, noteModule);
-
-        Etudiant etudiant = new Etudiant(nom, age, classe);
+        Etudiant etudiant = new Etudiant(nom, age);
         classe.etudiants.add(etudiant);
     }
 
@@ -84,22 +78,20 @@ public class Administrateur extends Personne {
         String nom = getNomPersonne(scan);
         String module = getModule(scan);
         double note = getNoteModule(scan);
-        scan.nextLine();
-        Map<String,Double> put = new HashMap<String,Double>();
+        Map<String, Double> put = new HashMap<>();
         put.put(module, note);
         for (Etudiant etudiant : classe.etudiants) {
-            if (etudiant.nom.equals(nom)) {
+            if (etudiant.getNom().equals(nom)) {
                 etudiant.getNote().add(put);
-                //Somme des notes
+                // Calcul de la moyenne
                 double somme = 0;
                 for (Map<String, Double> noteMap : etudiant.getNote()) {
                     for (Map.Entry<String, Double> entry : noteMap.entrySet()) {
                         somme += entry.getValue();
                     }
                 }
-
-                //Calcul de la moyenne
                 etudiant.setMoyenne(somme / etudiant.getNote().size());
+                break;
             }
         }
     }
@@ -157,10 +149,7 @@ public class Administrateur extends Personne {
             }
         }
     }
-    // Partie ajout d'etuudiant
-    public void ajouterEtudiant(Etudiant etudiant, ArrayList<Etudiant> etudiants) {
-        etudiants.add(etudiant);
-    }
+
 
     // Partie modification des notes de l'étudiant
     public void modifierNoteModule(Classe classe, Scanner scan) {
@@ -330,6 +319,24 @@ public class Administrateur extends Personne {
             }
         }
     }
-    // Ajout d'un professeur à une classe
 
+    // Fonction relatif à la classe Administrateur
+    public Administrateur creerAdministrateur(Scanner scan) {
+        String nom = getNomPersonne(scan);
+        int age = getAgePersonne(scan);
+        Administrateur administrateur = new Administrateur(nom, age, new ArrayList<Classe>());
+        return administrateur;
+    }
+
+    // Modification d'un administrateur
+    public void modifierNomAdministrateur(Scanner scan, Administrateur administrateur) {
+        System.out.println("Entrez le nouveau nom: ");
+        String newNom = scan.nextLine();
+        administrateur.setNom(newNom);
+    }
+    public void modifierAgeAdministrateur(Scanner scan, Administrateur administrateur) {
+        System.out.println("Entrez le nouvel age: ");
+        int newAge = scan.nextInt();
+        administrateur.setAge(newAge);
+    }
 }
