@@ -471,19 +471,13 @@ public class Main {
     public static void gestionAdministrateurs(Scanner scanner, Administrateur admin) {
         menuGestionAdministrateurs();
         int choix = getChoix(scanner);
-        while (choix != 5) {
+        while (choix != 3) {
             switch (choix) {
                 case 1:
                     admin.creerAdministrateur(scanner);
                     break;
                 case 2:
-                    admin.supprimerAdministrateur(scanner);
-                    break;
-                case 3:
                     modifierAdministrateur(scanner, admin);
-                    break;
-                case 4:
-                    admin.listerAdministrateurs();
                     break;
                 default:
                     System.out.println("Choix invalide");
@@ -492,5 +486,29 @@ public class Main {
             menuGestionAdministrateurs();
             choix = getChoix(scanner);
         }
+    }
+
+    static void modifierAdministrateur(Scanner scanner, Administrateur admin){
+        modifierAdministrateurMenu();
+        int choice = getChoix(scanner);
+        while (choice != 3) {
+            switch (choice) {
+                case 1:
+                    admin.setNom(admin.getNomPersonne(scanner));
+                    break;
+                case 2:
+                    admin.setAge(admin.getAgePersonne(scanner));
+                    break;
+                default:
+                    System.out.println("Choix invalide");
+                    break;
+            }
+        }
+    }
+    static void modifierAdministrateurMenu(){
+        System.out.println("===Faites le choix de l'operation a effectue");
+        System.out.println("1.Modifier le nom de l'admin");
+        System.out.println("2. Modifier l'age de l'admin");
+        System.out.println("3. Quitter");
     }
 }
